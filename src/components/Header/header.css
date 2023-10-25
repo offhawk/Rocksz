@@ -1,0 +1,17 @@
+.header{
+    display: flex;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    padding: 15px 50px;
+    border-radius: 50px;
+    background-color: rgba(21, 19, 22, .7);
+    border: 2px solid var(--secondary2);
+    backdrop-filter: blur(15px);
+    z-index: 9;
+    top: 20px;
+}
+
+.header svg{
+    fill: var(--text);
+}
