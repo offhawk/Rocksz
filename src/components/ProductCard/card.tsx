@@ -2,8 +2,6 @@ import './card.css';
 
 function Card({ produto }) {
     
-    console.log(produto);
-
     return(
         <div className="card">
         <div className="card-img">

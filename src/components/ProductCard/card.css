@@ -19,6 +19,7 @@ body{
     justify-content: center;
     align-items: center;
     background-color: var(--background);
+    overflow-x: hidden;
 }
 
 main{
@@ -38,7 +39,7 @@ main{
 
 .container{
     border-radius: 40px;
-    padding: 50px;
+    padding: 0px 50px;
     display: grid;
     grid-template-columns: minmax(264px, 350px) minmax(264px, 350px) minmax(264px, 350px);
     gap: 20px;
@@ -131,6 +132,7 @@ main{
 }
 
 .card-price p{
+    text-align: center;
     color: #c6c6c6;
     font-weight: 200;
 }

@@ -1,0 +1,140 @@
+.product-modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 50px;
+    z-index: 999;
+}
+
+.Modal:focus{
+    all: unset;
+}
+
+.product-modal:before{
+    background-color: rgba(0,0,0, .7);
+    backdrop-filter: blur(15px);
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.product-container{
+    position: relative;
+    display: flex;
+    max-width: 768px;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: rgba(21, 19, 22, .7);
+    border: 2px solid var(--secondary2);
+    backdrop-filter: blur(30px);
+    margin: auto;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc(100% - 350px);
+    margin-left: 20px;
+    padding: 0 10px 0 0;
+}
+
+.product-info p{
+    font-weight: 400;
+    color: var(--textsecondary);
+    text-align: justify;
+}
+
+.product-img{
+    width: 350px;
+    height: 100%;
+    display: block;
+}
+
+.product-img img {
+    height: 350px;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.product-price button{
+    all: unset;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+    text-align: center;
+    background-color: var(--primary);
+    border-radius: 50px;
+    margin-top: 10px;
+}
+
+.product-price button:hover{
+    cursor: pointer;
+}
+
+.product-name{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.product-name p{
+    color: var(--textsecondary);
+}
+
+.product-name span{
+    margin-right: 15px;
+}
+
+.product-name span:hover{
+    cursor: pointer;
+}
+
+.product-name svg{
+    fill: var(--text);
+}
+
+.product-details h2{
+    font-size: 1.25em;
+    margin-bottom: 5px;
+}
+
+.product-details p{
+    margin-bottom: 10px;
+}
+
+.product-info .card-price p{
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
+
+.show{
+    display: block;
+}
+
+@media (min-width: 600px) and (max-width: 768px) {
+    .product-container {flex-direction: column;}
+    .product-img img, .product-img{width: 100%;}
+    .product-info{width: 100%; margin-left: 0; padding: 0;}
+}
+
+@media (max-width: 599px) {
+    .product-container {flex-direction: column;}
+    .product-img img, .product-img{width: 100%;}
+    .product-info{width: 100%; margin-left: 0; padding: 0;}
+}
+
+@media (min-width: 1440px) {
+    .product-container {flex-direction: column; max-width: 600px;}
+    .product-img img, .product-img{width: 100%;}
+    .product-info{width: 100%; margin-left: 0; padding: 0;}
+}
