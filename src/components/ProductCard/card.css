@@ -169,5 +169,6 @@ main{
 }
 
 @media (max-width: 599px) {
-    .container { grid-template-columns: repeat(1, minmax(264px, 350px)); }
+    .container { grid-template-columns: repeat(1, minmax(264px, 350px));
+                 justify-content: center; }
 }
