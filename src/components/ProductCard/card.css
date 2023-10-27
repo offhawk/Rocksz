@@ -39,7 +39,7 @@ main{
 
 .container{
     border-radius: 40px;
-    padding: 0px 50px;
+    padding: 0px 50px 50px 50px;
     display: grid;
     grid-template-columns: minmax(264px, 350px) minmax(264px, 350px) minmax(264px, 350px);
     gap: 20px;
@@ -94,7 +94,6 @@ main{
 }
 
 .card-info{
-    height: calc(100% - 200px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -123,6 +122,13 @@ main{
     background-color: var(--secondary2);
     border-radius: 15px;
     border: 2px solid var(--secondary2);
+}
+
+.info-wrap{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: calc(100% - 195px);
 }
 
 .card-price{
@@ -160,15 +166,82 @@ main{
     cursor: pointer;
 }
 
+select{
+    all: unset;
+
+}
+
+select:focus{
+    all: unset;
+}
+
+select:hover{
+    all: unset;
+}
+
+option:hover{
+    background-color: red;
+}
+
+#filtros{
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+#filtros label{
+    display: flex;
+    color: var(--textsecondary);
+    align-items: center;
+    gap: 10px;
+    margin: 10px 10px 10px 0;
+}
+
+.select__control{
+    background-color: var(--secondary)!important;
+    color: var(--text)!important;
+    border: 2px solid var(--secondary2)!important;
+    width: auto!important;
+    border-radius: 50px!important;
+}
+
+.select__control--is-focused{
+    border: none!important;
+    outline: none!important;
+}
+
+.option--is-selected{
+    background-color: red!important;
+}
+
+.select__control--is-focused--
+
+.select__single-value{
+    color: var(--textsecondary)!important;
+}
+
+.select__menu{
+    background-color: var(--secondary)!important;
+}
+
+
+
 @media (min-width: 600px) {
     .container { grid-template-columns: repeat(2, minmax(264px, 350px)); }
+    #filtros { justify-content: center; }
+    
 }
 
 @media (min-width: 900px) {
     .container { grid-template-columns: repeat(3, minmax(264px, 350px)); }
+    #filtros { justify-content: end; }
+    
 }
 
 @media (max-width: 599px) {
     .container { grid-template-columns: repeat(1, minmax(264px, 350px));
                  justify-content: center; }
+    #filtros label{ width: 100%!important;}
+    .basic-single{ width: 100%!important; }
+    .select__control{ width: 100%!important;}
 }

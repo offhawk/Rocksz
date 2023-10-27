@@ -2,7 +2,7 @@ import './product.css';
 import { useRef } from 'react';
 import  closeModal  from '../../pages/productsPage/index';
 
-function ProductDetails({ produto }) {
+function ProductDetails({ produto, onButtonClick }) {
     
     const modalRef = useRef(null);
 
@@ -27,7 +27,7 @@ function ProductDetails({ produto }) {
                             <p>R$ {produto.preco}</p>
                         </div>
                         <div className='quant-container'></div>
-                        <div className='card-button'><button>Comprar</button></div>
+                        <div className='card-button' onClick={() => onButtonClick(produto)}><button>Comprar</button></div>
                     </div>
                 </div>
             </div>

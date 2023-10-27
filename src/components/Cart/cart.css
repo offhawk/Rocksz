@@ -1,0 +1,86 @@
+.cart{
+    background-color: rgba(21, 19, 22, .7);
+    border: 2px solid var(--secondary2);
+    backdrop-filter: blur(15px);
+    color: var(--text);
+    border-radius: 30px;
+    width: 350px;
+    padding: 15px;
+}
+
+.cart-container{
+    width: 100%;
+    height: 100%;
+}
+
+.cart-product{
+    padding: 15px;
+    height: 92px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1 1 100%;
+    border-radius: 15px;
+    background-color: rgba(21, 19, 22, .7);
+    border: 2px solid var(--secondary2);
+    margin-bottom: 5px;
+}
+
+.cart-product:hover{
+    background-color: var(--secondary2);
+}
+
+.cart-img{
+    height: 100%;
+}
+
+.cart-img img{
+    object-fit: contain;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.cart-info{
+    font-weight: 600;
+}
+
+.cart h2{
+    margin: 10px 0;
+    text-align: center;
+}
+
+.cart-button{
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    flex: 1;
+}
+
+.cart-button svg{
+    fill: var(--text);
+    padding: 5px;
+    border-radius: 50%;
+    border: 2px solid var(--secondary2);
+    transition: all 200ms;
+}
+
+.cart-button svg:hover{
+    fill: red;
+    border-color: red;
+    cursor: pointer;
+}
+
+.cart-price{
+    font-weight: 400;
+    color: var(--textsecondary);
+}
+
+.Modal2{
+    position: fixed;
+    top: 95px;
+    right: 100px;
+    z-index: 1000;
+}

@@ -2,19 +2,73 @@ import { useEffect, useRef, useState } from 'react'
 import  Header  from '../../components/Header/header';
 import  Card  from '../../components/ProductCard/card';
 import  ProductDetails  from '../../components/ProductDetails/product';
+import  Cart  from '../../components/Cart/cart';
+
 import Modal from 'react-modal';
 import ReactDOM from 'react-dom';
+import Select from 'react-select';
 
 Modal.setAppElement('#root');
 Modal.defaultStyles.overlay.all = 'unset';
 
 function ProductsPage() {
 
+    const opcoesPreco = [
+        { value: '', label: 'Sem ordenação' },
+        { value: 'asc', label: 'Preço Ascendente' },
+        { value: 'desc', label: 'Preço Descendente' }
+    ]
+    const opcoesCat = [
+        { value: '', label: 'Todas as categorias' },
+        { value: 'Vinil', label: 'Vinil' },
+        { value: 'CD', label: 'CD' },
+        { value: 'Toca Discos', label: 'Toca Discos' },
+        { value: 'Camiseta', label: 'Camiseta' },
+    ]
+
     const [produtos, setProdutos] = useState([{}]);
+    const [produtosFilter, setProdutosFilter] = useState([{}]);
     const [show, setShow] = useState('hidden');
     const [produtoModal, setProdutoModal] = useState({});
+    const [sortBy, setSortBy] = useState(null); 
+    const [selectedCategory, setSelectedCategory] = useState(null); 
+    const [cart, setCart] = useState([]);
+
     const modalRef = useRef(null);
     const rootRef = useRef(null);
+
+    const handleSortByChange = (value) => {
+        setSortBy(value);
+      };
+      
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+    };
+    
+    const addToCart = (produto) => {
+        setCart([...cart, produto]);
+    };
+
+    const removeFromCart = (produto) => {
+        const updatedCart = cart.filter((item) => item !== produto);
+        setCart(updatedCart);
+    };
+
+    useEffect(() => {
+        const filteredProducts = produtos
+        .filter((produto) => !selectedCategory || produto.categoria.includes(selectedCategory))
+        .sort((a, b) => {
+            if (sortBy === 'asc') {
+                return a.preco - b.preco;
+            } else if (sortBy === 'desc') {
+                return b.preco - a.preco;
+            } else {
+                return 0;
+            }
+        });
+
+        setProdutosFilter(filteredProducts);
+    }, [sortBy, selectedCategory]);
 
     useEffect(() => { 
         const produtos2 = [{
@@ -114,9 +168,19 @@ function ProductsPage() {
         }];
 
         setProdutos(produtos2);
+        setProdutosFilter(produtos2);
       }, []);
 
       const [modalIsOpen, setIsOpen] = useState(false);
+      const [modalIsOpen2, setIsOpen2] = useState(false);
+
+        function openModal2() {
+            setIsOpen2(true);
+        }
+
+        function closeModal2() {
+            setIsOpen2(false);
+        }
 
         function openModal(produto) {
             setIsOpen(true);
@@ -135,7 +199,10 @@ function ProductsPage() {
     return (
         <>
         <div ref={rootRef}>
-            <Header/>
+            <Header onCartClick={modalIsOpen2?closeModal2:openModal2}/>
+            <Modal isOpen={modalIsOpen2} className="Modal2">
+                <Cart produtos={cart} onRemoveClick={removeFromCart}/>
+            </Modal>
             <div ref={modalRef}>
                 <Modal isOpen={modalIsOpen} className="Modal" overlayClassName="product-modal" onAfterOpen={afterOpenModal}>
                     <div className='product-name'>
@@ -145,17 +212,70 @@ function ProductsPage() {
                             <p>{produtoModal.info}</p>
                         </div>
                     </div>
-                    <ProductDetails produto={produtoModal}/>     
+                    <ProductDetails produto={produtoModal} onButtonClick={addToCart}/>     
                 </Modal>
             </div>
             <div className='info'>
-                <h1>Todos os produtos ({produtos.length})</h1>
-                <div id='filtros'></div>
+                <h1>{selectedCategory?selectedCategory:'Todos os Produtos'}({produtosFilter.length})</h1>
+                <div id='filtros'>
+                    <label>
+                        Ordenar:
+                        <Select 
+                            className="basic-single"
+                            classNamePrefix="select"
+                            defaultValue={opcoesPreco[0]}
+                            isDisabled={false}
+                            isLoading={false}
+                            isClearable={false}
+                            isRtl={false}
+                            isSearchable={false}
+                            name="preco"
+                            options={opcoesPreco}
+                            onChange={(choice) => handleSortByChange(choice.value)}
+                            theme={(theme) => ({
+                                ...theme,
+                                colors: {
+                                  ...theme.colors,
+                                  primary25: 'var(--secondary2)',
+                                  primary: 'var(--primary)',
+                                  neutral0: 'var(--text)',
+                                  neutral80: 'var(--textsecondary)'
+                                },
+                              })}
+                        />
+                    </label>
+                    <label>
+                        Filtrar:
+                        <Select 
+                            className="basic-single"
+                            classNamePrefix="select"
+                            defaultValue={opcoesCat[0]}
+                            isDisabled={false}
+                            isLoading={false}
+                            isClearable={false}
+                            isRtl={false}
+                            isSearchable={false}
+                            name="preco"
+                            options={opcoesCat}
+                            onChange={(choice) => handleCategoryChange(choice.value)}
+                            theme={(theme) => ({
+                                ...theme,
+                                colors: {
+                                  ...theme.colors,
+                                  primary25: 'var(--secondary2)',
+                                  primary: 'var(--primary)',
+                                  neutral0: 'var(--text)',
+                                  neutral80: 'var(--textsecondary)'
+                                },
+                              })}
+                        />
+                    </label>
+                </div>
             </div>
             <div className='container'>
-            {produtos.map((produto, index) => (
-                <div className='row' onClick={() => openModal(produto)}>
-                    <Card produto={produto} key={produto.nome + 1}/>
+            {produtosFilter.map((produto, index) => (
+                <div className='row'>
+                    <Card produto={produto} key={produto.nome + 1} onButtonClick={addToCart} onProductClick={openModal}/>
                 </div>
             ))}
             </div>
