@@ -1,1 +1,2 @@
-
+<h1>Rocksz</h1>
+Bem-vindo ao repositório do projeto Rocksz! Este é um site simples que exibe um catálogo de produtos relacionados à música, como instrumentos, acessórios e mídia. O projeto foi desenvolvido para ensinar como construir uma interface de usuário interativa usando React, JavaScript, HTML e CSS. Este projeto foi produzido por <a href="https://github.com/iszxsz">Isabela Ferreira</a> e <a href="https://github.com/offhawk">Gustavo Henrique</a>.
